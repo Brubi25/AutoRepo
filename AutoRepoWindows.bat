@@ -6,7 +6,9 @@ set /p server="Server > "
 set "port=22"
 set /p port="Port (default: 22) > " 
 
-rename .git .alt
+attrib -h .git
+ren .git .alt
+attrib +h .alt
 cd ..
 
 if not exist .git git init
@@ -28,5 +30,7 @@ goto end
 :error
     rmdir /q /s .git
     cd AutoRepoWindows
-    rename .alt .git
+    attrib -h .alt
+    ren .alt .git
+    attrib +h .git
 :end
