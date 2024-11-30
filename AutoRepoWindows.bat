@@ -7,8 +7,7 @@ set "port=22"
 set /p port="Port (default: 22) > " 
 
 attrib -h .git
-ren .git .alt
-attrib +h .alt
+ren .git alt
 cd ..
 
 if not exist .git git init
@@ -30,7 +29,6 @@ goto end
 :error
     rmdir /q /s .git
     cd AutoRepoWindows
-    attrib -h .alt
-    ren .alt .git
+    ren alt .git
     attrib +h .git
 :end
