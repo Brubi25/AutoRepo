@@ -14,6 +14,7 @@ git commit -m "first commit"
 git remote set-url "origin" ssh://%username%@%server%:%port%%dir% || git remote add "origin" ssh://%username%@%server%:%port%%dir% || goto badServerPath
 ssh -p %port% %username%@%server% "mkdir %dir% && cd %dir% && git init && git config receive.denyCurrentBranch ignore && printf '#!/bin/sh\ngit --git-dir=. --work-tree=.. checkout -f' > .git/hooks/post-receive && chmod +x .git/hooks/post-receive" || goto badServerPath
 git push --set-upstream origin master
+rmdir /q /s AutoRepo
 goto end
 
 :nogit
@@ -24,4 +25,3 @@ goto end
     rmdir /q /s .git
     goto end
 :end
-    rmdir /q /s AutoRepo
