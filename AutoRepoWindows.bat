@@ -8,7 +8,7 @@ set /p server="Server > "
 set "port=22"
 set /p port="Port (default: 22) > " 
 
-cd %localPath%
+cd %localPath% || goto badLocalPath
 
 if not exist .git git init
 git add . || goto nogit
@@ -25,6 +25,9 @@ goto end
 :badServerPath
     echo Server Path schlecht
     goto error
+:badLocalPath
+    echo Local Path schlecht
+    goto end
 :error
     rmdir /q /s .git
 :end
